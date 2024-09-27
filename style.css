@@ -1,0 +1,92 @@
+/* FONT */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('/public/fonts/plus_jakarta_sans/variable/PlusJakartaSans[wght].ttf');
+}
+
+:root {
+  --border-radius: 0.25rem;
+  --general-spacing: 0.75rem;
+  --padding-x: 4rem;
+  --border: 0.1rem solid #000;
+}
+
+/* BODY */
+body {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  font-family: 'Plus Jakarta Sans', Arial, Helvetica, sans-serif;
+}
+
+/* HEADER */
+header {
+  padding-block: var(--general-spacing);
+  padding-inline: var(--padding-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: var(--border);
+  border-radius: var(--border-radius);
+}
+
+#header-title {
+  display: flex;
+  align-items: center;
+  gap: var(--general-spacing);
+}
+
+#header-title > svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  fill: #000;
+}
+
+#header-title h1 {
+  font-size: 1.75rem;
+}
+
+#header-buttons {
+  display: flex;
+  align-items: center;
+  gap: var(--general-spacing);
+}
+
+/* MAIN */
+main {
+  flex-grow: 1;
+  flex-basis: 0%;
+  padding-block: var(--general-spacing);
+  padding-inline: var(--padding-x);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--general-spacing);
+}
+
+main section {
+  height: 100%;
+  max-height: 100%;
+  padding: var(--general-spacing);
+  display: flex;
+  flex-direction: column;
+  gap: var(--general-spacing);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  overflow-y: hidden;
+}
+
+main section > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--general-spacing);
+}
+
+dialog {
+  margin: auto;
+}
+
+#editBookFormId {
+  display: none;
+}
