@@ -1,5 +1,41 @@
-- [ ]
+# Todo
+- [v] Header
+    - [v] CSS
+        - [v] Naming
+        - [v] Code
+- [v] Shelf
+    - [v] Info when empty
+    - [v] CSS
+        - [v] Naming
+        - [v] Code
+- [v] Book Card
+    - [v] CSS
+        - [v] Naming
+        - [v] Code
+- [v] Form
+    - [v] New
+        - [v] Validation
+    - [v] Edit
+        - [v] Validation
+        - [v] Cancel Button Logic
+    - [v] CSS
+        - [v] Naming
+        - [v] Code
+- [ ] Modal notification
+- [ ] Light mode
 - [ ] Dark mode
+- [ ] Responsive
+- [ ] alt
 - [ ] Delete unused comment
 - [ ] Check req
 - [ ] SUBMIT
+
+# Color
+- Light
+    - Text
+    - Border & Bg Hover
+    - Bg
+- Dark
+    - Text
+    - Border & Bg Hover
+    - Bg

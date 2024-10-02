@@ -4,20 +4,26 @@
   src: url('/public/fonts/plus_jakarta_sans/variable/PlusJakartaSans[wght].ttf');
 }
 
-:root {
+html {
+  --primary-color: rgb(255, 255, 255);
+  --secondary-color: rgb(214, 214, 214);
+  --text-color: rgb(36, 36, 36);
   --border-radius: 0.25rem;
   --general-spacing: 0.75rem;
   --padding-x: 4rem;
-  --border: 0.1rem solid #000;
+  --border: 0.1rem solid var(--secondary-color);
+  --shadow: 0 3px 10px 0 var(--secondary-color);
 }
 
 /* BODY */
 body {
+  max-height: 100dvh;
   height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
+  background-color: var(--primary-color);
   font-family: 'Plus Jakarta Sans', Arial, Helvetica, sans-serif;
 }
 
@@ -27,64 +33,305 @@ header {
   padding-inline: var(--padding-x);
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
+  gap: var(--general-spacing);
   border-bottom: var(--border);
   border-radius: var(--border-radius);
+  background-color: var(--primary-color);
 }
 
 #header-title {
+  color: var(--text-color);
   display: flex;
   align-items: center;
   gap: var(--general-spacing);
 }
 
-#header-title > svg {
+#header-title > img {
   width: 2.5rem;
   height: 2.5rem;
-  fill: #000;
 }
 
 #header-title h1 {
   font-size: 1.75rem;
 }
 
+#searchBook {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  gap: var(--general-spacing);
+}
+
+#searchBook label {
+  display: none;
+}
+
+#searchBook input {
+  width: 50%;
+  padding-inline: var(--general-spacing);
+  border: var(--border);
+  border-radius: var(--border-radius);
+}
+
+#searchBook button {
+  background: inherit;
+  border: var(--border);
+  border-radius: var(--border-radius);
+}
+
+#searchBook button svg {
+  fill: var(--text-color);
+}
+
+#searchBook button:hover {
+  background-color: var(--secondary-color);
+}
+
 #header-buttons {
   display: flex;
-  align-items: center;
   gap: var(--general-spacing);
+}
+
+#header-buttons button {
+  background: inherit;
+  border: var(--border);
+  border-radius: var(--border-radius);
+}
+
+#header-buttons button svg {
+  fill: var(--text-color);
+}
+
+#header-buttons button:hover {
+  background: var(--secondary-color);
 }
 
 /* MAIN */
 main {
-  flex-grow: 1;
-  flex-basis: 0%;
+  height: calc(100% - 4.2rem);
   padding-block: var(--general-spacing);
   padding-inline: var(--padding-x);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--general-spacing);
+  background: var(--primary-color);
 }
 
-main section {
-  height: 100%;
+.shelf-card {
   max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: inherit;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  scrollbar-color: var(--secondary-color) transparent;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+.shelf-card-title {
+  color: var(--text-color);
+  padding-inline: var(--general-spacing);
+  padding-block: var(--general-spacing);
+  display: flex;
+  align-items: center;
+  gap: calc(var(--general-spacing)/2);
+  position: sticky;
+  top: 0;
+  background-color: inherit;
+  line-height: 1;
+  z-index: 30;
+}
+
+.shelf-card-title > svg {
+  width: 2rem;
+  height: 2rem;
+  fill: var(--text-color);
+}
+
+.shelf-card-body {
+  padding-inline: var(--general-spacing);
+  padding-bottom: var(--general-spacing);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--general-spacing);
+}
+
+.shelf-card-body:has(div.shelf-card-body-empty) {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shelf-card-body-empty {
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--general-spacing);
+}
+
+.shelf-card-body-empty svg {
+  height: 8rem;
+  width: 8rem;
+  fill: var(--text-color);
+}
+
+/* DIALOG (FORM &)*/
+
+.form-dialog {
+  padding-block: calc(var(--general-spacing) * 2);
+  padding-inline: calc(var(--general-spacing) * 3);
+  width: 30dvw;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  margin: auto;
+}
+
+.form-dialog-title {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--general-spacing)/2);
+}
+
+.form-dialog-title svg {
+  fill: var(--text-color);
+  width: 2rem;
+  height: 2rem;
+}
+
+.form-dialog form {
+  padding-block: var(--general-spacing);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--general-spacing);
+}
+
+.form-dialog form div:has(input[type=checkbox]) {
+  display: flex;
+  align-items: center;
+  gap: var(--general-spacing);
+}
+
+.form-dialog form input {
+  padding: calc(var(--general-spacing)/2);
+  border: var(--border);
+  border-radius: var(--border-radius);
+}
+
+.form-dialog-buttons {
+  display: flex;
+  justify-content: end;
+  gap: var(--general-spacing);
+}
+
+.form-dialog-buttons button {
+  padding-inline: var(--general-spacing);
+  padding-block: calc(var(--general-spacing)/2);
+  border: var(--border);
+  border-radius: var(--border-radius);
+}
+
+.form-dialog-buttons-main {
+  color: var(--primary-color);
+  background: var(--text-color);
+}
+
+/* Book Card */
+
+.book-card {
+  height: fit-content;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--general-spacing);
+  border-inline: var(--border);
+  border-bottom: var(--border);
+  border-radius: var(--border-radius);
+  background-color: var(--primary-color);
+}
+
+.book-card:hover {
+  box-shadow: var(--shadow);
+}
+
+.book-card-cover {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.book-card img {
+  width: 100%;
+}
+
+.book-card-body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: stretch;
+  position: absolute;
+  bottom: 0;
+  opacity: 0;
+  border-radius: var(--border-radius);
+}
+
+.book-card:hover .book-card-body {
+  opacity: 100;
+}
+
+.book-card-detail {
+  width: 100%;
+  max-height: 50%;
   padding: var(--general-spacing);
   display: flex;
   flex-direction: column;
-  gap: var(--general-spacing);
+  gap: calc(var(--general-spacing) / 2);
+  background: var(--primary-color);
+  overflow-y: auto;
+  border-radius: var(--border-radius);
+  line-height: 1.25;
+  scrollbar-gutter: stable;
+  scrollbar-color: var(--secondary-color) transparent;
+  scrollbar-width: thin;
+}
+
+.book-card-buttons {
+  padding: var(--general-spacing);
+  display: flex;
+  justify-content: end;
+  gap: calc(var(--general-spacing) / 2);
+  border-radius: var(--border-radius);
+}
+
+.book-card-buttons button {
+  padding-inline: 0;
+  padding: 0.5rem;
   border: var(--border);
   border-radius: var(--border-radius);
-  overflow-y: hidden;
+  background-color: white;
 }
 
-main section > div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--general-spacing);
+.book-card-buttons button:hover {
+  background: var(--secondary-color);
 }
 
-dialog {
-  margin: auto;
+.book-card-buttons button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: var(--text-color);
 }
 
 #editBookFormId {

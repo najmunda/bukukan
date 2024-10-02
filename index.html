@@ -3,7 +3,8 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bookshelf App</title>
+    <link rel="shortcut icon" href="/public/logo.svg" type="image/x-icon">
+    <title>Bukukan</title>
     <!-- Impor script kamu di sini -->
     <!-- Lampirkan `defer` jika pemanggilan dilakukan dalam <head> -->
     <link rel="stylesheet" href="reset.css">
@@ -13,14 +14,14 @@
   <body>
     <header>
       <div id="header-title">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M320-320h480v-480h-80v280l-100-60-100 60v-280H320v480Zm0 80q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm360-720h200-200Zm-200 0h480-480Z"/></svg>
+        <img src="/public/logo.svg" alt="">
         <h1>Bukukan</h1>
       </div>
       <form role="search" id="searchBook" data-testid="searchBookForm">
         <label for="searchBookTitle">Judul</label>
         <input name="searchBookTitle" id="searchBookTitle" type="search" data-testid="searchBookFormTitleInput" />
         <button id="searchSubmit" type="submit" data-testid="searchBookFormSubmitButton">
-          Cari
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
         </button>
       </form>
       <div id="header-buttons">
@@ -34,21 +35,15 @@
     </header>
 
     <main>
-      <dialog id="bookFormDialog">
-        <h2>Tambah Buku Baru</h2>
+      <dialog class="form-dialog" id="bookFormDialog">
+        <div class="form-dialog-title">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M440-280h80v-160h160v-80H520v-160h-80v160H280v80h160v160ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
+          <h2>Tambah Buku</h2>
+        </div>
         <form id="bookForm" data-testid="bookForm">
-          <div>
-            <label for="bookFormTitle">Judul</label>
-            <input name="bookFormTitle" id="bookFormTitle" type="text" required data-testid="bookFormTitleInput" />
-          </div>
-          <div>
-            <label for="bookFormAuthor">Penulis</label>
-            <input name="bookFormAuthor" id="bookFormAuthor" type="text" required data-testid="bookFormAuthorInput" />
-          </div>
-          <div>
-            <label for="bookFormYear">Tahun</label>
-            <input name="bookFormYear" id="bookFormYear" type="number" required data-testid="bookFormYearInput" />
-          </div>
+          <input name="bookFormTitle" id="bookFormTitle" type="text" required placeholder="Judul" data-testid="bookFormTitleInput" title="Judul" />
+          <input name="bookFormAuthor" id="bookFormAuthor" type="text" required placeholder="Penulis" data-testid="bookFormAuthorInput" title="Penulis" />
+          <input name="bookFormYear" id="bookFormYear" type="number" required placeholder="Tahun" data-testid="bookFormYearInput" title="Tahun" />
           <div>
             <label for="bookFormIsComplete">Selesai dibaca</label>
             <input 
@@ -59,31 +54,27 @@
               data-testid="bookFormIsCompleteCheckbox"
             />
           </div>
-          <button id="bookFormCancel">
-            Batal
-          </button>
-          <button id="bookFormSubmit" type="submit" data-testid="bookFormSubmitButton">
-            Tambah Buku
-          </button>
+          <div class="form-dialog-buttons">
+            <button id="bookFormSubmit" class="form-dialog-buttons-main" type="submit" data-testid="bookFormSubmitButton">
+              Tambah
+            </button>
+            <button id="bookFormCancel">
+              Batal
+            </button>
+          </div>
         </form>
       </dialog>
 
-      <dialog id="editBookFormDialog">
-        <h2>Edit Buku</h2>
-        <form method="dialog" id="editBookForm">
+      <dialog class="form-dialog" id="editBookFormDialog">
+        <div class="form-dialog-title">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"/></svg>
+          <h2>Edit Buku</h2>
+        </div>
+        <form id="editBookForm">
           <input name="editBookFormId" id="editBookFormId" type="text" readonly />
-          <div>
-            <label for="editBookFormTitle">Judul</label>
-            <input name="editBookFormTitle" id="editBookFormTitle" type="text" />
-          </div>
-          <div>
-            <label for="editBookFormAuthor">Penulis</label>
-            <input name="editBookFormAuthor" id="editBookFormAuthor" type="text" />
-          </div>
-          <div>
-            <label for="editBookFormYear">Tahun</label>
-            <input name="editBookFormYear" id="editBookFormYear" type="number" />
-          </div>
+          <input name="editBookFormTitle" id="editBookFormTitle" type="text" required placeholder="Judul" title="Judul" />
+          <input name="editBookFormAuthor" id="editBookFormAuthor" type="text" required placeholder="Penulis" title="Penulis" />
+          <input name="editBookFormYear" id="editBookFormYear" type="number" required placeholder="Tahun" title="Tahun" />
           <div>
             <label for="editBookFormIsComplete">Selesai dibaca</label>
             <input 
@@ -93,23 +84,31 @@
               value="true"
             />
           </div>
-          <button id="editBookFormCancel" formmethod="dialog">
-            Batal
-          </button>
-          <button id="editBookFormSubmit" type="submit">
-            Edit
-          </button>
+          <div class="form-dialog-buttons">
+            <button id="editBookFormSubmit" class="form-dialog-buttons-main" type="submit">
+              Edit
+            </button>
+            <button id="editBookFormCancel">
+              Batal
+            </button>
+          </div>
         </form>
       </dialog>
 
-      <section>
-        <h2>Belum selesai dibaca</h2>
-        <div id="incompleteBookList" data-testid="incompleteBookList"></div>
+      <section class="shelf-card">
+        <div class="shelf-card-title">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
+          <h2>Belum dibaca</h2>
+        </div>
+        <div id="incompleteBookList" class="shelf-card-body" data-testid="incompleteBookList"></div>
       </section>
 
-      <section>
-        <h2>Selesai dibaca</h2>
-        <div id="completeBookList" data-testid="completeBookList"></div>
+      <section class="shelf-card">
+        <div class="shelf-card-title">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="m424-312 282-282-56-56-226 226-114-114-56 56 170 170ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
+          <h2>Selesai dibaca</h2>
+        </div>
+        <div id="completeBookList" class="shelf-card-body" data-testid="completeBookList"></div>
       </section>
       
     </main>
