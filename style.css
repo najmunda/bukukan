@@ -12,19 +12,29 @@ html {
   --general-spacing: 0.75rem;
   --padding-x: 4rem;
   --border: 0.1rem solid var(--secondary-color);
-  --shadow: 0 3px 10px 0 var(--secondary-color);
+  --book-per-row: 6;
+  scrollbar-gutter: stable;
+  scrollbar-color: var(--secondary-color) transparent;
+  scrollbar-width: thin;
+}
+
+html.dark {
+  --primary-color: rgb(39, 39, 39);
+  --secondary-color: rgb(80, 80, 80);
+  --text-color: rgb(240, 240, 240);
 }
 
 /* BODY */
 body {
-  max-height: 100dvh;
-  height: 100dvh;
+  max-width: 1280px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: stretch;
+  position: relative;
   background-color: var(--primary-color);
   font-family: 'Plus Jakarta Sans', Arial, Helvetica, sans-serif;
+  margin-inline: auto;
+  border-inline: var(--border);
 }
 
 /* HEADER */
@@ -35,9 +45,11 @@ header {
   justify-content: space-between;
   align-items: stretch;
   gap: var(--general-spacing);
+  position: sticky;
+  top: 0;
   border-bottom: var(--border);
-  border-radius: var(--border-radius);
   background-color: var(--primary-color);
+  z-index: 9999;
 }
 
 #header-title {
@@ -69,13 +81,15 @@ header {
 
 #searchBook input {
   width: 50%;
+  color: var(--text-color);
+  background: var(--primary-color);
   padding-inline: var(--general-spacing);
   border: var(--border);
   border-radius: var(--border-radius);
 }
 
 #searchBook button {
-  background: inherit;
+  background: var(--primary-color);
   border: var(--border);
   border-radius: var(--border-radius);
 }
@@ -94,7 +108,7 @@ header {
 }
 
 #header-buttons button {
-  background: inherit;
+  background: var(--primary-color);
   border: var(--border);
   border-radius: var(--border-radius);
 }
@@ -110,23 +124,17 @@ header {
 /* MAIN */
 main {
   height: calc(100% - 4.2rem);
-  padding-block: var(--general-spacing);
   padding-inline: var(--padding-x);
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--general-spacing);
+  display: flex;
+  flex-direction: column;
   background: var(--primary-color);
 }
 
 .shelf-card {
-  max-height: 100%;
+  padding-bottom: var(--general-spacing);
   display: flex;
   flex-direction: column;
-  background-color: inherit;
-  overflow-y: auto;
-  scrollbar-gutter: stable;
-  scrollbar-color: var(--secondary-color) transparent;
-  scrollbar-width: thin;
+  position: relative;
 }
 
 ::-webkit-scrollbar-button {
@@ -134,17 +142,16 @@ main {
 }
 
 .shelf-card-title {
-  color: var(--text-color);
-  padding-inline: var(--general-spacing);
   padding-block: var(--general-spacing);
+  color: var(--text-color);
   display: flex;
   align-items: center;
   gap: calc(var(--general-spacing)/2);
+  background-color: var(--primary-color);
+  line-height: 1;
   position: sticky;
   top: 0;
-  background-color: inherit;
-  line-height: 1;
-  z-index: 30;
+  z-index: 10;
 }
 
 .shelf-card-title > svg {
@@ -154,27 +161,19 @@ main {
 }
 
 .shelf-card-body {
-  padding-inline: var(--general-spacing);
-  padding-bottom: var(--general-spacing);
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--book-per-row), minmax(0, 1fr));
   gap: var(--general-spacing);
 }
 
-.shelf-card-body:has(div.shelf-card-body-empty) {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .shelf-card-body-empty {
+  height: calc((100dvw - var(--padding-x) - ((var(--book-per-row) - 1) * var(--general-spacing) ) ) / var(--book-per-row) * 1.32);
+  grid-column: span var(--book-per-row) / span var(--book-per-row);
   color: var(--text-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: var(--general-spacing);
 }
 
 .shelf-card-body-empty svg {
@@ -191,6 +190,7 @@ main {
   width: 30dvw;
   border: var(--border);
   border-radius: var(--border-radius);
+  background: var(--primary-color);
   margin: auto;
 }
 
@@ -198,6 +198,7 @@ main {
   display: flex;
   align-items: center;
   gap: calc(var(--general-spacing)/2);
+  color: var(--text-color);
 }
 
 .form-dialog-title svg {
@@ -220,10 +221,26 @@ main {
   gap: var(--general-spacing);
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .form-dialog form input {
   padding: calc(var(--general-spacing)/2);
+  color: var(--text-color);
+  background: var(--primary-color);
   border: var(--border);
   border-radius: var(--border-radius);
+}
+
+.form-dialog form label {
+  color: var(--text-color);
 }
 
 .form-dialog-buttons {
@@ -235,6 +252,8 @@ main {
 .form-dialog-buttons button {
   padding-inline: var(--general-spacing);
   padding-block: calc(var(--general-spacing)/2);
+  background: var(--primary-color);
+  color: var(--text-color);
   border: var(--border);
   border-radius: var(--border-radius);
 }
@@ -254,14 +273,9 @@ main {
   justify-content: center;
   align-items: center;
   gap: var(--general-spacing);
-  border-inline: var(--border);
-  border-bottom: var(--border);
+  border: var(--border);
   border-radius: var(--border-radius);
   background-color: var(--primary-color);
-}
-
-.book-card:hover {
-  box-shadow: var(--shadow);
 }
 
 .book-card-cover {
@@ -301,6 +315,7 @@ main {
   gap: calc(var(--general-spacing) / 2);
   background: var(--primary-color);
   overflow-y: auto;
+  color: var(--text-color);
   border-radius: var(--border-radius);
   line-height: 1.25;
   scrollbar-gutter: stable;
@@ -321,7 +336,7 @@ main {
   padding: 0.5rem;
   border: var(--border);
   border-radius: var(--border-radius);
-  background-color: white;
+  background-color: var(--primary-color);
 }
 
 .book-card-buttons button:hover {
@@ -336,4 +351,51 @@ main {
 
 #editBookFormId {
   display: none;
+}
+
+/* RESPONSIVE */
+
+@media (max-width:1024px) {
+  html {
+    --book-per-row: 5;
+  }
+}
+
+@media (max-width:896px) {
+  html {
+    --book-per-row: 4;
+  }
+
+  .form-dialog {
+    width: 50dvw;
+  }
+}
+
+@media (max-width:768px) {
+  html {
+    --book-per-row: 3;
+    --padding-x: 1rem;
+  }
+
+  #searchBook input {
+    width: 75%;
+  }
+}
+
+@media (max-width:640px) {
+  html {
+    --book-per-row: 2;
+  }
+
+  #header-title h1 {
+    display: none;
+  }
+
+  #searchBook input {
+    width: 100%;
+  }
+
+  .form-dialog {
+    width: 80dvw;
+  }
 }

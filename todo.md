@@ -9,6 +9,7 @@
         - [v] Naming
         - [v] Code
 - [v] Book Card
+    - [ ] Hover on mobile
     - [v] CSS
         - [v] Naming
         - [v] Code
@@ -21,21 +22,12 @@
     - [v] CSS
         - [v] Naming
         - [v] Code
-- [ ] Modal notification
-- [ ] Light mode
-- [ ] Dark mode
-- [ ] Responsive
-- [ ] alt
-- [ ] Delete unused comment
-- [ ] Check req
-- [ ] SUBMIT
+- [v] Dark mode
+- [v] Responsive
+- [v] alt
+- [v] Delete unused comment
+- [v] Check req
+- [v] SUBMIT
 
-# Color
-- Light
-    - Text
-    - Border & Bg Hover
-    - Bg
-- Dark
-    - Text
-    - Border & Bg Hover
-    - Bg
+# Future
+- Notification toast
